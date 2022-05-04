@@ -1,0 +1,18 @@
+@startuml
+
+state c <<choice>>
+state d <<choice>>
+
+[*] --> Consultado
+
+Consultado --> c: Carga de datos
+c --> Edicion : Es cliente
+c --> Nuevo : No es cliente
+Edicion --> d: Validar datos
+d --> Guardado : Actualizar
+d --> [*]: No actualizar
+Nuevo --> Guardado : Actualizar
+
+Guardado --> [*]: Finalizar
+
+@enduml

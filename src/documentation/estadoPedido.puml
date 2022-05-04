@@ -1,0 +1,16 @@
+@startuml
+
+[*] --> Cotizado : Solicitar
+
+Cotizado -> Confirmado: Confirmar
+Confirmado -> Pendiente: Preparar
+Pendiente -> EnDistribucion: Despachar
+Pendiente --> Cancelado: Cancelar
+EnDistribucion --> Cancelado: Cancelar
+EnDistribucion --> Entregado: Entregar
+EnDistribucion <-- EnDistribucion: Reprogramar
+
+Cancelado --> [*]: Finalizar
+Entregado --> [*]
+
+@enduml
