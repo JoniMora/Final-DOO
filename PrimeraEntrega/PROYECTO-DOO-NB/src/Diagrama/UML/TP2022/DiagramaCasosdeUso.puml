@@ -1,0 +1,60 @@
+@startuml
+
+'---------------------ACTORES---------------------
+actor Operador as operador
+actor Distribuidor as distribuidor
+actor EncargadoAdministrativo as encargadoAdmin
+actor Presidente as presidente
+
+'---------------------OPERADOR---------------------
+usecase (1. Consultar clientes) as uc1
+usecase (2. Registrar cliente) as uc2
+usecase (3. Modificar cliente) as uc3
+usecase (4. Gestionar pedidos) as uc4
+usecase (5. Registrar pedido) as uc5
+usecase (6. Generar factura) as uc6
+usecase (7. Gestionar productos) as uc7
+usecase (8. Actualizar precios) as uc8
+
+'---------------------DISTRIBUIDOR---------------------
+usecase (9. Generar listado pedidos pendientes) as uc9
+usecase (10. Cancelar pedido pendiente) as uc10
+usecase (11. Gestionar entregas) as uc11
+usecase (12. Entregar pedido) as uc12
+usecase (13. Entregar factura y firmar) as uc13
+usecase (14. Generar listado pedidos entregados) as uc14
+usecase (15. Generar listado pedidos no entregados) as uc15
+usecase (16. Gestionar ingresos) as uc16
+usecase (17. Generar listado de ingresos diarios) as uc17
+
+'OPERADOR
+operador --> uc1
+operador --> uc4
+operador --> uc7
+uc1 <.. uc2 : "<<ext>>"
+uc1 <.. uc3 : "<<ext>>"
+uc1 <.. uc4 : "<<ext>>"
+uc4 <.. uc5 : "<<ext>>"
+uc5 <.. uc6 : "<<inc>>"
+uc4 <.. uc9 : "<<ext>>"
+uc8 <.. uc7 : "<<ext>>"
+uc10 <.. uc9 : "<<ext>>"
+
+
+'DISTRIBUIDOR
+uc9 --> distribuidor
+distribuidor --> uc11 : "<<ext>>"
+uc11 <.. uc12 : "<ext>>"
+uc11 <.. uc15 : "<<ext>>"
+uc11 <.. uc14 : "<<ext>>"
+uc12 <.. uc13 : "<<inc>>"
+
+'ENCARGADO ADMINISTRATIVO
+uc14 --> encargadoAdmin
+encargadoAdmin --> uc16 
+uc16 <.. uc17 : "<<ext>>"
+
+'PRESIDENTE
+presidente -right-> uc8
+
+@enduml

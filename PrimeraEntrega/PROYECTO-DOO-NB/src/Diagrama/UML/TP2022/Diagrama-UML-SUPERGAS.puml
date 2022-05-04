@@ -1,0 +1,116 @@
+@startuml
+
+Persona "1" <|-- "0..1" Distribuidor
+Persona "1" <|-- "0..1" Cliente
+Distribuidor "1" o-- "1" Zona
+Domicilio "1" o-right- "1" Cliente
+Barrio "1" o-right- "1..*" Domicilio
+Zona "1" o-right- "1..*" Barrio
+Cliente "1" o-right- "0..*" Pedido
+Pedido "1" *-- "1" DetallePedido
+Pedido "1" *-right- "1" PeriodoVenta
+DetallePedido "0..*" -- "1..*" Producto
+Producto "1" *-right- "1" TipoProducto
+Factura "1" -- "1" Pedido
+Factura "1" o-up- "1" MedioDePago
+Factura "1" *-right- "1" DetalleFactura
+
+class Cliente {
+    - String razon_social
+    - long telefono
+    - Domicilio domicilio_cliente
+    - Pedido pedido_cliente
+
+    + esCliente()
+    + nuevoCliente()
+    + generarPedido()
+    + pedidoGenerado()
+    + confirmacionPedido()
+    + cancelarPedido()
+}
+
+class Domicilio {
+    - String nombre_calle
+    - int nro_calle
+    - String dpto
+    - int piso
+    - Barrio barrio_domicilio
+}
+
+class Pedido {
+    - date fecha_entrega
+    - time hora_entrega
+    - PeriodoVenta periodo
+    - Factura factura_pedido
+    - DetallePedido detalle
+
+    + listadoDePedidosPendientes()
+}
+
+class DetallePedido {
+    - Producto productos_cliente
+    - int cantidad
+    - double precio_unitario
+}
+
+class Producto {
+    - TipoProducto tipo
+    - double cantidad
+    - double precio
+
+    + actualizarPrecios()
+}
+
+class TipoProducto {
+    - String nombre
+    - String unidadMedida
+}
+
+class PeriodoVenta {
+    String periodo
+}
+
+class Persona {
+    - String tipo_documento
+    - long nro_documento
+    - String apellido
+    - String nombre
+}
+
+class Distribuidor {
+    - int zona_distribuidor
+
+    + entregarPedido()
+    + listadoDePedidosEntregados()
+    + listadoDePedidosNoEntregados()
+}
+
+class Zona {
+    String barrios_de_zona
+}
+
+class Barrio {
+    - String nombre_barrio
+    - Zona zona_barrio
+}
+
+class Factura {
+    - int numero
+    - Pedido pedido_cliente
+    - MedioDePago medios_pago
+
+    + generarFactura()
+    + seleccionarMDP()
+    + generarIngresosDiario()
+    + facturaAnulada()
+}
+
+class DetalleFactura {
+    - String firma_cliente
+}
+
+class MedioDePago {
+    - String tipo
+}
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+
+    allow_mixing
+
+    actor ":Operador" as operador
+    boundary ":IntConsulPedidos" as intConsulPed
+    control ":ControladorPedidos" as ctrlPed
+    collections ":PlantillaPedidos" as plantiPed
+
+    operador -> intConsulPed : "1.opcionConsultarPedidos()\n6.1 opcionCancelarPedido()"
+    intConsulPed -> ctrlPed : "2.consultarPedidos()\n6.2 cancelarPedido()"
+    ctrlPed -> ctrlPed : "3.buscarPedidos()"
+    ctrlPed -up-> plantiPed : "4.mostrarPedidos()"
+
+@enduml

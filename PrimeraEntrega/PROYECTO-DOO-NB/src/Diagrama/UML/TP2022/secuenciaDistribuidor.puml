@@ -1,0 +1,25 @@
+@startuml
+
+actor ":Operador" as operador
+boundary ":IntConsulPedido" as intConsulPedido
+control ":ControladorPedido" as ctrlPedido
+collections ":Distribuidor" as distribuidor 
+activate intConsulPedido
+activate ctrlPedido
+
+
+operador -> intConsulPedido : 1.opcionConsultarPedido()
+intConsulPedido -> ctrlPedido : 2.ConsultarPedido()
+ctrlPedido -> ctrlPedido : 3.BuscaPedido()
+ctrlPedido -> distribuidor : 4.MostrarPedido()
+
+activate distribuidor
+
+ctrlPedido -> distribuidor : 4.1.Factura()
+distribuidor --> ctrlPedido : InformePedidos()
+
+destroy distribuidor  
+
+ctrlPedido --> intConsulPedido : InformePedidos()
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+
+allow_mixing
+
+    actor ":Operador" as operador
+    boundary ":IntConsulPedido" as intConsulPedido
+    control ":ControladorPedido" as ctrlPedido
+    collections ":PlantillaPedido" as plantiPedido
+
+    operador -> intConsulPedido : "1.opcionGestionarPedido()\n4.1 opcionNuevoPedido()"
+    intConsulPedido -> ctrlPedido : "2.consultarPedidos()\n4.2 nvoPedido()"
+    ctrlPedido -> ctrlPedido : "3.buscarPedido()"
+    ctrlPedido -up-> plantiPedido : "4.mostrarPedido()"
+
+@enduml

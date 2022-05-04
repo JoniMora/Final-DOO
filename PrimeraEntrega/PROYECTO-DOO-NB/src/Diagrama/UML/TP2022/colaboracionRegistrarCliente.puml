@@ -1,0 +1,15 @@
+@startuml
+
+allow_mixing
+
+    actor ":Operador" as operador
+    boundary ":IntConsulCliente" as intConsulClient
+    control ":ControladorCliente" as ctrlClient
+    collections ":PlantillaClientes" as plantiClient
+
+    operador -> intConsulClient : "1.opcionConsultarClientes()\n4.1 opcionNuevoCliente()"
+    intConsulClient -> ctrlClient : "2.consultarClientes()\n4.2 nvoCliente()"
+    ctrlClient -> ctrlClient : "3.buscarCliente()"
+    ctrlClient -up-> plantiClient : "4.mostrarClientes()"
+
+@enduml
