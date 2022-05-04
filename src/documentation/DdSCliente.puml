@@ -1,0 +1,17 @@
+@startuml
+
+actor Operador 
+boundary InterfazCliente
+control ControladorCliente
+collections GestionarPedido
+
+
+Operador -> InterfazCliente : 1.Telefono
+InterfazCliente -> ControladorCliente : 2.ConsultaCliente
+ControladorCliente -> ControladorCliente : 3.ClienteNuevo
+ControladorCliente -> GestionarPedido : 4.RegistraPedidos
+
+
+
+@enduml
+

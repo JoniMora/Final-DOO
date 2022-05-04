@@ -1,0 +1,25 @@
+@startuml
+
+actor Operador 
+boundary InterfazPedido
+control ControladorPedido
+collections Distribuidor 
+activate InterfazPedido
+activate ControladorPedido
+
+
+Operador -> InterfazPedido : 1.NotificacionPedido
+InterfazPedido -> ControladorPedido : 2.ConsultarPedido
+ControladorPedido -> ControladorPedido : 3.BuscaPedido
+ControladorPedido -> Distribuidor : 4.DesignaPedido
+
+activate Distribuidor
+
+ControladorPedido -> Distribuidor : 4.1.Factura
+Distribuidor --> ControladorPedido : InformePedidos
+
+destroy Distribuidor  
+
+ControladorPedido --> InterfazPedido : InformePedidos
+
+@enduml
